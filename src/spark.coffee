@@ -11,7 +11,9 @@ colors =
   repeat:       "#ff8973"
   statement:    "#67d4e2"
 
-module.exports = (lines, svg) ->
+margin = 1
+
+module.exports = (lines, container) ->
 
     cd = []
     cr = []
@@ -23,9 +25,16 @@ module.exports = (lines, svg) ->
         .domain(cd)
         .range(cr)
 
-    path = svg.append("g")
-        .attr("transform", "translate(1,1)")
-        .selectAll(".line")
+    height = lines.length
+    width = d3.max lines, (d) -> d.length
+
+    svg = container.append("svg")
+        .attr("width", width + 2*margin)
+        .attr("height", height + 2*margin)
+        .append("g")
+        .attr("transform", "translate(#{margin},#{margin})")
+
+    path = svg.selectAll(".line")
         .data(lines)
         .enter().append("path")
         .classed("line", -> yes)

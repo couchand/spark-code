@@ -31,9 +31,4 @@
         { indent: 2, length: 12, type: "statement" }
       ]
 
-      svg = d3.select("#viz").append("svg")
-        .attr("width", 200)
-        .attr("height", 200)
-        .append("g")
-
-      spark lines, svg
+      spark lines, d3.select("#viz")
