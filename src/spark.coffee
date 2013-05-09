@@ -5,11 +5,23 @@
 #   length: num
 #   type: str
 
+colors =
+  function:     "#37e36f"
+  conditional:  "#ffb073"
+  repeat:       "#ff8973"
+  statement:    "#67d4e2"
+
 module.exports = (lines, svg) ->
 
+    cd = []
+    cr = []
+    for type, color of colors
+      cd.push type
+      cr.push color
+
     color = d3.scale.ordinal()
-        .domain(['function', 'conditional', 'repeat', 'statement'])
-        .range(['#7e4', '#cb3', '#e54', '#39d'])
+        .domain(cd)
+        .range(cr)
 
     path = svg.selectAll(".line")
         .data(lines)
