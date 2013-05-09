@@ -24,7 +24,7 @@ module.exports = (lines, svg) ->
         .range(cr)
 
     path = svg.append("g")
-        .attr("transform", "translate(2,2)")
+        .attr("transform", "translate(1,1)")
         .selectAll(".line")
         .data(lines)
         .enter().append("path")
