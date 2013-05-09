@@ -13,7 +13,8 @@ colors =
 
 margin = 1
 
-module.exports = (lines, container) ->
+module.exports = (files, container) ->
+    files = [files] unless files[0] instanceof Array
 
     cd = []
     cr = []
@@ -25,17 +26,16 @@ module.exports = (lines, container) ->
         .domain(cd)
         .range(cr)
 
-    height = lines.length
-    width = d3.max lines, (d) -> d.length
-
-    svg = container.append("svg")
-        .attr("width", width + 2*margin)
-        .attr("height", height + 2*margin)
+    svg = container.selectAll("svg")
+        .data(files)
+        .enter().append("svg")
+        .attr("width", (d) -> 2*margin + d3.max d, (l) -> l.length)
+        .attr("height", (d) -> 2*margin + d.length)
         .append("g")
         .attr("transform", "translate(#{margin},#{margin})")
 
     path = svg.selectAll(".line")
-        .data(lines)
+        .data((d) -> d)
         .enter().append("path")
         .classed("line", -> yes)
         .attr("stroke", (d) -> color d.type)
