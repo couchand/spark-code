@@ -23,7 +23,9 @@ module.exports = (lines, svg) ->
         .domain(cd)
         .range(cr)
 
-    path = svg.selectAll(".line")
+    path = svg.append("g")
+        .attr("transform", "translate(2,2)")
+        .selectAll(".line")
         .data(lines)
         .enter().append("path")
         .classed("line", -> yes)
