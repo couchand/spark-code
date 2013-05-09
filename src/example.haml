@@ -1,0 +1,39 @@
+%html
+  %head
+    %title<
+      spark-code example
+    %script{:src => "https://raw.github.com/mbostock/d3/master/d3.js"}
+    :javascript
+      var module = {};
+    %script{:src => "build/spark.js"}
+  %body
+    #viz
+    :coffeescript
+      spark = module.exports
+
+      lines = [
+        { indent: 0, length: 15, type: "function" }
+        { indent: 1, length:  9, type: "statement" }
+        { indent: 1, length: 14, type: "statement" }
+        { indent: 1, length: 18, type: "statement" }
+        { indent: 1, length: 35, type: "conditional" }
+        { indent: 2, length: 16, type: "statement" }
+        { indent: 2, length: 21, type: "statement" }
+        { indent: 1, length: 11, type: "statement" }
+        { indent: 1, length: 17, type: "repeat" }
+        { indent: 2, length: 23, type: "statement" }
+        { indent: 2, length: 11, type: "statement" }
+        { indent: 2, length: 16, type: "conditional" }
+        { indent: 3, length: 15, type: "statement" }
+        { indent: 3, length: 13, type: "statement" }
+        { indent: 3, length: 24, type: "statement" }
+        { indent: 2, length:  9, type: "statement" }
+        { indent: 2, length: 12, type: "statement" }
+      ]
+
+      svg = d3.select("#viz").append("svg")
+        .attr("width", 200)
+        .attr("height", 200)
+        .append("g")
+
+      spark lines, svg
